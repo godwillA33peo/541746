@@ -1,55 +1,22 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
-cd Documents/data/
-
-
-# In[2]:
-
-
 import pandas as pd #for loading and wrangling the data
 import bar_chart_race as bcr # for making the bar chart race (animation)
-
-
-# In[3]:
 
 
 #loading the CSV data 
 data = pd.read_csv("hivpr.csv", index_col="Country Name")
 
-
-# In[4]:
-
-
 #taking a a look at the data
 data.head()
 
-
-# In[5]:
-
-
 #changing the orientation of the datafame
 data = data.transpose()
-
-
-# In[6]:
-
-
 data.head()
-
-
-# In[7]:
-
 
 #dropping rows that won't be used for the animation
 data.drop(["Country Code", "Series Name", "Series Code"], inplace = True)
-
-
-# In[9]:
-
 
 #listing the regions that are in the data set so that i do not include them in the animation
 regions = ["Africa Eastern and Southern", "Africa Western and Central", "East Asia & Pacific",
@@ -63,44 +30,20 @@ regions = ["Africa Eastern and Southern", "Africa Western and Central", "East As
                            "Turks and Caicos Islands","Upper middle income","West Bank and Gaza","World"
                           ]
 
-
-# In[10]:
-
-
 #dropping the above columns
 data = data.drop(columns = regions)
 
-
-# In[11]:
-
-
 data.head()
-
-
-# In[12]:
-
 
 #converting the year column into a python date object and making it the index
 data.index = pd.to_datetime(data.index)
 
-
-# In[13]:
-
-
 # checking the data type of the dataframe
 data.dtypes
-
-
-# In[14]:
-
 
 #converting int a floating data type so it can be use for the animation
 data = data.astype(float)
 data.dtypes
-
-
-# In[28]:
-
 
 #bar cahrt race function
 bcr.bar_chart_race(df=data, n_bars=10, filter_column_colors= True, figsize=(5, 3),
@@ -110,10 +53,6 @@ bcr.bar_chart_race(df=data, n_bars=10, filter_column_colors= True, figsize=(5, 3
                     title_size='8',
                     bar_label_size=7
                 )
-
-
-# In[ ]:
-
 
 
 
